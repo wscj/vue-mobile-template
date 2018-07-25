@@ -55,3 +55,45 @@ obj.formatParams = (obj) => {
   }
   return obj
 }
+
+/**
+ * 深度拷贝
+ */
+obj.clone = (item) => {
+  if (item === null || item === undefined) {
+    return item
+  }
+
+  // Dom node
+  if (item.nodeType && item.cloneNode) {
+    return item.cloneNode(true)
+  }
+
+  var i, obj, key
+  var type = toString.call(item)
+
+  if (type === '[object Date]') { // Date
+    return new Date(item.getTime())
+  } else if (type === '[object Array]') { // Array
+    obj = []
+    i = item.length
+
+    while (i--) {
+      obj[i] = obj.clone(item[i])
+    }
+  } else if (type === '[object Object]' && item.constructor === Object) { // Object
+    obj = {}
+
+    for (key in item) {
+      obj[key] = obj.clone(item[key])
+    }
+  } else if (type === '[object Object]') { // Instance of function
+    obj = new item.constructor()
+
+    for (var attr in item) {
+      if (item.hasOwnProperty(attr)) obj[attr] = obj.clone(item[attr])
+    }
+  }
+
+  return obj || item
+}
