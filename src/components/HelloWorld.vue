@@ -9,6 +9,20 @@ export default {
   name: 'HelloWorld',
   props: {
     msg: String
+  },
+  methods: {
+    async testGet () {
+      const res = await this.$http.testGet({ test: 123 })
+      console.log(res)
+    },
+    async testPost () {
+      const res = await this.$http.testPost({ test: 123 })
+      console.log(res)
+    }
+  },
+  created () {
+    this.testGet()
+    this.testPost()
   }
 }
 </script>
