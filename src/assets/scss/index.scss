@@ -1,0 +1,66 @@
+// rem换算函数
+@function rem($pt, $base-font-size: 50) {
+  @return ($pt / $base-font-size) * 1rem;
+}
+
+// 截断文本
+@mixin text-overflow() {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+// 清除浮动方案一
+@mixin clearfix() {
+  &:before,
+  &:after {
+    display: table;
+    content: ' ';
+  }
+  &:after {
+    clear: both;
+  }
+}
+
+// 使用flex布局使子元素居中
+@mixin flex-center() {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+@mixin rmb() {
+  content: '¥';
+}
+
+@mixin border-t($color) {
+  position: relative;
+  &::before {
+    display: block;
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    border-top: 1px solid $color;
+    content: ' ';
+  }
+}
+
+@mixin border-b($color) {
+  position: relative;
+  &::after {
+    display: block;
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    border-top: 1px solid $color;
+    content: ' ';
+  }
+}
+
+@mixin flex-scroll() {
+  flex: 1;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+}

@@ -3,3 +3,12 @@
     <h1>This is an about page</h1>
   </div>
 </template>
+
+<style scoped lang="scss">
+@import '~@/assets/scss/index.scss';
+.about {
+  h1 {
+    font-size: rem(30);
+  }
+}
+</style>

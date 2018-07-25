@@ -16,3 +16,13 @@ export default {
   }
 }
 </script>
+
+<style scoped lang="scss">
+@import '~@/assets/scss/index.scss';
+.home {
+  img {
+    margin-top: rem(50);
+    width: rem(160);
+  }
+}
+</style>
