@@ -1,16 +1,12 @@
-import api from './api'
 import axios from './axios'
+const origin = process.env.VUE_APP_ORIGIN // 获取环境配置
 
-const obj = {}
-
-obj.testGet = async (data = {}) => {
-  const res = await axios.get(api.testGet, { params: data })
-  return res
+export function testGet (data = {}) {
+  return axios.get(origin + '/testGet', { params: data })
 }
 
-obj.testPost = async (data = {}) => {
-  const res = await axios.post(api.testPost, { params: data })
-  return res
+export function testPost (data = {}) {
+  return axios.post(origin + '/testPost', { params: data })
 }
 
-export default obj
+export default {}

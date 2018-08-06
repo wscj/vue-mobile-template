@@ -5,6 +5,7 @@
 </template>
 
 <script>
+import { testGet, testPost } from '@/request'
 export default {
   name: 'HelloWorld',
   props: {
@@ -12,11 +13,11 @@ export default {
   },
   methods: {
     async testGet () {
-      const res = await this.$http.testGet({ test: 123 })
+      const res = await testGet({ test: 123 })
       console.log(res)
     },
     async testPost () {
-      const res = await this.$http.testPost({ test: 123 })
+      const res = await testPost({ test: 123 })
       console.log(res)
     }
   },

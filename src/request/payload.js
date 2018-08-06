@@ -7,7 +7,7 @@ export default {
   'client': {
     'caller': 'caller',
     'userAgent': navigator.userAgent,
-    'deviceId': (new Fingerprint().get()).toString(), 
+    'deviceId': (new Fingerprint().get()).toString(),
     'versionCode': navigator.productSub,
     'versionName': navigator.appName,
     'platform': navigator.platform,
