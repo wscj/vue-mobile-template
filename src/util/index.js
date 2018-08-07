@@ -1,6 +1,4 @@
-const obj = {}
-
-export default obj
+import getPlatform from './platform.js'
 
 /**
  * 格式化日期
@@ -8,7 +6,7 @@ export default obj
  * @param  {string} fmt  y:年; M:月份 如: "yyyy-MM-dd"
  * @return {string}      日期字符串
  */
-obj.parseTime = (date, fmt = 'yyyy-MM-dd') => {
+const parseTime = (date, fmt = 'yyyy-MM-dd') => {
   if (!date || (date.getTime && date.getTime() === 0)) {
     return ''
   }
@@ -43,7 +41,7 @@ obj.parseTime = (date, fmt = 'yyyy-MM-dd') => {
  * @param {object} obj 参数对象
  * @returns {object} 排除空字符串
  */
-obj.formatParams = (obj) => {
+const formatParams = (obj) => {
   if (Object.prototype.toString.call(obj) === '[Object Object]') {
     let ret = {}
     for (var key in obj) {
@@ -59,7 +57,7 @@ obj.formatParams = (obj) => {
 /**
  * 深度拷贝
  */
-obj.clone = (item) => {
+const clone = (item) => {
   if (item === null || item === undefined) {
     return item
   }
@@ -79,21 +77,47 @@ obj.clone = (item) => {
     i = item.length
 
     while (i--) {
-      obj[i] = obj.clone(item[i])
+      obj[i] = clone(item[i])
     }
   } else if (type === '[object Object]' && item.constructor === Object) { // Object
     obj = {}
 
     for (key in item) {
-      obj[key] = obj.clone(item[key])
+      obj[key] = clone(item[key])
     }
   } else if (type === '[object Object]') { // Instance of function
     obj = new item.constructor()
 
     for (var attr in item) {
-      if (item.hasOwnProperty(attr)) obj[attr] = obj.clone(item[attr])
+      if (item.hasOwnProperty(attr)) obj[attr] = clone(item[attr])
     }
   }
 
   return obj || item
+}
+
+const getBrowerType = function () {
+  const ua = navigator.userAgent.toLowerCase()
+  // 微信
+  if (ua.indexOf('micromessenger') !== -1) {
+    return 'WX'
+  }
+  // 安卓QQ
+  if (ua.indexOf('mobile mqqbrowser') !== -1) {
+    return 'QQ'
+  }
+  // iphone QQ
+  if ((ua.indexOf('iphone') > -1 || ua.indexOf('mac') > -1) &&
+      (ua.indexOf('qq') > -1 && ua.indexOf('mqqbrowser') === -1)) {
+    return 'QQ'
+  }
+  return 'BROWSER'
+}
+
+export default {
+  parseTime,
+  formatParams,
+  clone,
+  getBrowerType,
+  getPlatform
 }
