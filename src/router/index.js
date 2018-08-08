@@ -23,7 +23,6 @@ const router = new Router({
 // fix：iOS下的微信浏览器，分享页面或复制链接，其链接一直为初始页面时的链接
 const isIosWx = _.getPlatform().os === 'iOS' && _.getBrowerType() === 'WX'
 
-// 部分页面要求登陆状态，若未登陆则自动跳转到登陆页，登陆完成自动跳回来
 router.beforeEach((to, from, next) => {
   next()
   isIosWx && setTimeout(() => {
