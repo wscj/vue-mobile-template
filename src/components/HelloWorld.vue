@@ -14,7 +14,7 @@ export default {
   methods: {
     async testGet () {
       const res = await testGet({ test: 123 })
-      console.log(res)
+      console.log(res.data.data.hello)
     },
     async testPost () {
       const res = await testPost({ test: 123 })
@@ -23,7 +23,7 @@ export default {
   },
   created () {
     this.testGet()
-    this.testPost()
+    // this.testPost()
   }
 }
 </script>

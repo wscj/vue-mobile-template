@@ -1,7 +1,7 @@
 import Axios from 'axios'
 import payload from './payload.js'
 import _ from '@/util'
-import Router from '@/router'
+// import Router from '@/router'
 
 // 创建axios实例
 const axios = Axios.create({
@@ -42,7 +42,6 @@ axios.interceptors.response.use(function (response) {
   //   Router.replace({ path: '/login' })
   //   throw new Error('拦截错误: ')
   // }
-  console.log(Router)
   return response
 }, function (error) {
   return Promise.reject(error)
