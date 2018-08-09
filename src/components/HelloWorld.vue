@@ -13,12 +13,25 @@ export default {
   },
   methods: {
     async testGet () {
-      const res = await testGet({ test: 123 })
-      console.log(res.data.data.hello)
+      try {
+        const res = await testGet({ test: 123 })
+        console.log(res.data.data.hello)
+      } catch (err) {
+        if (err.toString().indexOf('Network Error') > -1) {
+          // 使用localhost或ip有跨域问题
+          window.location.href = 'http://0.0.0.0:5858'
+        }
+        throw err
+      }
     },
     async testPost () {
-      const res = await testPost({ test: 123 })
-      console.log(res)
+      try {
+        const res = await testPost({ test: 123 })
+        console.log(res)
+      } catch (err) {
+        // 处理错误
+        throw err
+      }
     }
   },
   created () {
