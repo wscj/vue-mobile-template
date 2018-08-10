@@ -1,4 +1,11 @@
-import getPlatform from './platform.js'
+import platformInfo from './platform.js'
+
+/**
+ * 获取平台信息
+ */
+export const getPlatform = () => {
+  return platformInfo
+}
 
 /**
  * 格式化日期
@@ -6,7 +13,7 @@ import getPlatform from './platform.js'
  * @param  {string} fmt  y:年; M:月份 如: "yyyy-MM-dd"
  * @return {string}      日期字符串
  */
-const parseTime = (date, fmt = 'yyyy-MM-dd') => {
+export const parseTime = (date, fmt = 'yyyy-MM-dd') => {
   if (!date || (date.getTime && date.getTime() === 0)) {
     return ''
   }
@@ -41,7 +48,7 @@ const parseTime = (date, fmt = 'yyyy-MM-dd') => {
  * @param {object} obj 参数对象
  * @returns {object} 排除空字符串
  */
-const formatParams = (obj) => {
+export const formatParams = (obj) => {
   if (Object.prototype.toString.call(obj) === '[Object Object]') {
     let ret = {}
     for (var key in obj) {
@@ -57,7 +64,7 @@ const formatParams = (obj) => {
 /**
  * 深度拷贝
  */
-const clone = (item) => {
+export const clone = (item) => {
   if (item === null || item === undefined) {
     return item
   }
@@ -96,7 +103,7 @@ const clone = (item) => {
   return obj || item
 }
 
-const getBrowerType = function () {
+export const getBrowerType = function () {
   const ua = navigator.userAgent.toLowerCase()
   // 微信
   if (ua.indexOf('micromessenger') !== -1) {
@@ -114,10 +121,4 @@ const getBrowerType = function () {
   return 'BROWSER'
 }
 
-export default {
-  parseTime,
-  formatParams,
-  clone,
-  getBrowerType,
-  getPlatform
-}
+export default {}

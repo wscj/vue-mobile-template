@@ -1,6 +1,6 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import _ from '@/util'
+import { getPlatform, getBrowerType } from '@/util'
 
 Vue.use(Router)
 
@@ -19,7 +19,7 @@ const router = new Router({
   ]
 })
 // fix：iOS下的微信浏览器，分享页面或复制链接，其链接一直为初始页面时的链接
-const isIosWx = _.getPlatform().os === 'iOS' && _.getBrowerType() === 'WX'
+const isIosWx = getPlatform().os === 'iOS' && getBrowerType() === 'WX'
 
 router.beforeEach((to, from, next) => {
   next()

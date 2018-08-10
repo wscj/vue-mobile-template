@@ -1,6 +1,6 @@
 import Axios from 'axios'
 import payload from './payload.js'
-import _ from '@/util'
+import { formatParams } from '@/util'
 // import Router from '@/router'
 
 // 创建axios实例
@@ -22,13 +22,13 @@ axios.interceptors.request.use(function (config) {
   // }
 
   if (config.method === 'get') {
-    config.params = _.formatParams(config.params)
+    config.params = formatParams(config.params)
   }
 
   // 合并api全局参数
   if (config.method === 'post') {
     let params = Object.assign({}, payload)
-    params.data = _.formatParams(config.data)
+    params.data = formatParams(config.data)
     config.data = params
   }
   return config
