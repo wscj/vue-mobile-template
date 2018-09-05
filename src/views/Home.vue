@@ -8,11 +8,17 @@
 <script>
 // @ is an alias to /src
 import HelloWorld from '@/components/HelloWorld.vue'
+import bus from '@/mixins/bus.js'
 
 export default {
   name: 'home',
+  mixins: [bus],
   components: {
     HelloWorld
+  },
+  created () {
+    console.log(this.store.hello)
+    this.$bus.$emit('setHello', 'Home')
   }
 }
 </script>

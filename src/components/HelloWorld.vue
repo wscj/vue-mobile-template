@@ -15,7 +15,7 @@ export default {
     async testGet () {
       try {
         const res = await testGet({ test: 123 })
-        console.log(res.data.data.hello)
+        console.log(res.data.data)
       } catch (err) {
         throw err
       }

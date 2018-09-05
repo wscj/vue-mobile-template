@@ -1,6 +1,6 @@
 import Axios from 'axios'
 import payload from './payload.js'
-import { formatParams } from '@/util'
+import { formatParams } from '@/utils'
 // import Router from '@/router'
 
 // 创建axios实例

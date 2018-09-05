@@ -1,6 +1,6 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import { getPlatform, getBrowerType } from '@/util'
+import { getPlatform, getBrowerType } from '@/utils'
 
 Vue.use(Router)
 

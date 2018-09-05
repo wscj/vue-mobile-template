@@ -4,6 +4,17 @@
   </div>
 </template>
 
+<script>
+import bus from '@/mixins/bus.js'
+export default {
+  mixins: [bus],
+  created () {
+    console.log(this.store.hello)
+    this.$bus.$emit('setHello', 'About')
+  }
+}
+</script>
+
 <style scoped lang="scss">
 @import '~@/assets/scss/index.scss';
 .about {
