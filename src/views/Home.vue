@@ -9,7 +9,6 @@
 // @ is an alias to /src
 import HelloWorld from '@/components/HelloWorld.vue'
 import bus from '@/mixins/bus.js'
-
 export default {
   name: 'home',
   mixins: [bus],
