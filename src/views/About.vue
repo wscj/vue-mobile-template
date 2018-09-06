@@ -19,7 +19,7 @@ export default {
 @import '~@/assets/scss/index.scss';
 .about {
   h1 {
-    font-size: rem(30);
+    font-size: rem(60);
   }
 }
 </style>

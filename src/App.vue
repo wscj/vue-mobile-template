@@ -23,8 +23,8 @@ html, body, #app {
   position: relative;
 }
 #nav {
-  padding: rem(20);
-  font-size: rem(16);
+  padding: rem(40);
+  font-size: rem(32);
   a {
     font-weight: bold;
     color: #2c3e50;

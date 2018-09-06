@@ -41,7 +41,7 @@ export default {
 <style scoped lang="scss">
 @import '~@/assets/scss/index.scss';
 .hello {
-  font-size: rem(30);
-  line-height: rem(80);
+  font-size: rem(60);
+  line-height: rem(160);
 }
 </style>

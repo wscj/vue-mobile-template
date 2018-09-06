@@ -1,5 +1,5 @@
 // rem换算函数
-@function rem($pt, $base-font-size: 50) {
+@function rem($pt, $base-font-size: 100) {
   @return ($pt / $base-font-size) * 1rem;
 }
 
