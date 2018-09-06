@@ -2,12 +2,14 @@
   <div class="about">
     <h1>This is an about page</h1>
     <button @click="loading">Loading</button>
+    <button @click="toast">Toast</button>
   </div>
 </template>
 
 <script>
 import bus from '@/mixins/bus.js'
 import loading from '@/plugins/loading/index.js'
+import toast from '@/plugins/toast/index.js'
 export default {
   mixins: [bus],
   methods: {
@@ -16,6 +18,9 @@ export default {
       setTimeout(() => {
         loading(false)
       }, 2000)
+    },
+    toast () {
+      toast('这是提示语')
     }
   },
   created () {
