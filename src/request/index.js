@@ -11,5 +11,3 @@ export function testGet (data = {}) {
 export function testPost (data = {}) {
   return axios.post(origin + '/testPost', { params: data })
 }
-
-export default {}

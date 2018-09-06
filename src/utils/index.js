@@ -121,4 +121,13 @@ export const getBrowerType = function () {
   return 'BROWSER'
 }
 
-export default {}
+// 解析URL参数
+export const getUrlParam = function (name, url = '') {
+  url = url || window.location.search || window.location.hash
+  const reg = new RegExp('(^|&)' + name + '=([^&]*)(&|$)')
+  const r = url.substr(url.indexOf('?') + 1).match(reg)
+  if (r != null) {
+    return unescape(r[2])
+  }
+  return null
+}
