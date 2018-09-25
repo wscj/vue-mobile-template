@@ -26,7 +26,7 @@ export default {
 @import '~@/assets/scss/index.scss';
 .home {
   img {
-    margin-top: rem(100);
+    margin-top: rem(50);
     width: rem(320);
   }
 }

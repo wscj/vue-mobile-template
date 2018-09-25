@@ -124,40 +124,61 @@ button:active {
 
 // 高分辨率设备缩放为一个像素
 @media (-webkit-min-device-pixel-ratio:1.5), (min-device-pixel-ratio:1.5) {
-  .border-t {
-    &::before {
+  .border-horizon {
+    &::before, &::after {
       transform: scaleY(0.7);
     }
   }
-  .border-b {
-    &::after {
-      transform: scaleY(0.7);
+  .border-vertical {
+    &::before, &::after {
+      transform: scaleX(0.7);
+    }
+  }
+  .border-all {
+    &::before {
+      width: 142.857%;
+      height: 142.857%;
+      transform: scale(0.7, 0.7);
     }
   }
 }
 
 @media (-webkit-min-device-pixel-ratio:2), (min-device-pixel-ratio:2) {
-  .border-t {
-    &::before {
+  .border-horizon {
+    &::before, &::after {
       transform: scaleY(0.5);
     }
   }
-  .border-b {
-    &::after {
-      transform: scaleY(0.5);
+  .border-vertical {
+    &::before, &::after {
+      transform: scaleX(0.5);
+    }
+  }
+  .border-all {
+    &::before {
+      width: 200%;
+      height: 200%;
+      transform: scale(0.5, 0.5);
     }
   }
 }
 
 @media (-webkit-min-device-pixel-ratio:2.5), (min-device-pixel-ratio:2.5) {
-  .border-t {
-    &::before {
+  .border-horizon {
+    &::before, &::after {
       transform: scaleY(0.33333334);
     }
   }
-  .border-b {
-    &::after {
-      transform: scaleY(0.33333334);
+  .border-vertical {
+    &::before, &::after {
+      transform: scaleX(0.33333334);
+    }
+  }
+  .border-all {
+    &::before {
+      width: 300%;
+      height: 300%;
+      transform: scale(0.33333334, 0.33333334);
     }
   }
 }

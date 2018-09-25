@@ -1,6 +1,8 @@
 <template>
   <div class="hello">
-    Hello world
+    <p class="border-horizon">水平一像素</p>
+    <p class="border-vertical">垂直一像素</p>
+    <p class="border-all">四周一像素</p>
   </div>
 </template>
 
@@ -41,7 +43,22 @@ export default {
 <style scoped lang="scss">
 @import '~@/assets/scss/index.scss';
 .hello {
-  font-size: rem(60);
-  line-height: rem(160);
+  padding-top: rem(20);
+  font-size: rem(36);
+  line-height: rem(80);
+  .border-horizon {
+    @include border-b(#999);
+  }
+  .border-vertical {
+    @include border-l(#999);
+    @include border-r(#999);
+    width: rem(300);
+    margin: 0 auto;
+  }
+  .border-all {
+    @include border-all(#999, rem(30));
+    width: rem(600);
+    margin: 0 auto;
+  }
 }
 </style>
