@@ -103,3 +103,15 @@
   overflow-y: auto;
   -webkit-overflow-scrolling: touch;
 }
+
+// 只有两行文字，超出部分使用省略号截断
+@mixin two-rows() {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  /* autoprefixer: ignore next */
+  display: -webkit-box;
+  /* autoprefixer: ignore next */
+  -webkit-box-orient: vertical;
+  /* autoprefixer: ignore next */
+  -webkit-line-clamp: 2;
+}

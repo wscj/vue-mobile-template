@@ -3,6 +3,7 @@
     <p class="border-horizon">水平一像素</p>
     <p class="border-vertical">垂直一像素</p>
     <p class="border-all">四周一像素</p>
+    <p class="two-rows">两行省略号两行省略号两行省略号两行省略号两行省略号两行省略号两</p>
   </div>
 </template>
 
@@ -59,6 +60,13 @@ export default {
     @include border-all(#999, rem(30));
     width: rem(600);
     margin: 0 auto;
+  }
+  .two-rows {
+    @include two-rows();
+    width: rem(400);
+    margin: rem(30) auto;
+    line-height: rem(46);
+    font-size: rem(36);
   }
 }
 </style>
