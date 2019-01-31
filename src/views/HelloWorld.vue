@@ -9,6 +9,7 @@
 
 <script>
 import { testGet, testPost } from '@/request'
+import { throttle, debounce } from '@/utils'
 export default {
   name: 'HelloWorld',
   props: {
@@ -35,7 +36,15 @@ export default {
   },
   created () {
     this.testGet()
-    // this.testPost()
+  },
+  mounted () {
+    function handler (e) {
+      console.log(e)
+    }
+    console.log(throttle)
+    // const fn = throttle(handler)
+    const fn = debounce(handler, 250, false)
+    this.$el.addEventListener('mousemove', fn)
   }
 }
 </script>

@@ -1,20 +1,85 @@
 import platformInfo from './platform.js'
+import _operation from './operation.js'
 
-/**
- * 获取平台信息
- */
-export const getPlatform = () => {
+// 从UA获取设备信息
+export function getPlatform () {
   return platformInfo
 }
 
+// 加
+export function add (a, b) {
+  return _operation(a, b, 'add')
+}
+// 减
+export function subtract (a, b) {
+  return _operation(a, b, 'subtract')
+}
+// 乘
+export function multiply (a, b) {
+  return _operation(a, b, 'multiply')
+}
+// 除
+export function divide (a, b) {
+  return _operation(a, b, 'divide')
+}
+
+// 验证手机号码格式
+export function isPhoneFmt (phoneNum) {
+  return /^[1][3,4,5,6,7,8,9][0-9]{9}$/.test(phoneNum)
+}
+
+// 解析URL中的参数
+export function getUrlParam (name, url = '') {
+  url = url || window.location.search
+  const reg = new RegExp('(^|&)' + name + '=([^&]*)(&|$)')
+  const r = url.substr(url.indexOf('?') + 1).match(reg)
+  return r === null ? null : unescape(r[2])
+}
+
 /**
- * 格式化日期
- * @param  {Date} date   js Date 对象
- * @param  {string} fmt  y:年; M:月份 如: "yyyy-MM-dd"
- * @return {string}      日期字符串
+ * 格式化ajax发送的参数
+ * @param {object} obj 参数对象
+ * @returns {object} 排除空字符串
  */
-export const parseTime = (date, fmt = 'yyyy-MM-dd') => {
-  if (!date || (date.getTime && date.getTime() === 0)) {
+export const formatParams = (obj) => {
+  if (Object.prototype.toString.call(obj) === '[Object Object]') {
+    let ret = {}
+    for (var key in obj) {
+      if (obj[key] !== '') {
+        ret[key] = obj[key]
+      }
+    }
+    return ret
+  }
+  return obj
+}
+
+// 获取浏览器类型
+export function getBrowerType () {
+  const ua = navigator.userAgent.toLowerCase()
+  // 微信
+  if (ua.indexOf('micromessenger') !== -1) {
+    return 'WX'
+  }
+  // 安卓QQ
+  if (ua.indexOf('mobile mqqbrowser') !== -1) {
+    return 'QQ'
+  }
+  // iphone QQ
+  if ((ua.indexOf('iphone') > -1 || ua.indexOf('mac') > -1) &&
+      (ua.indexOf('qq') > -1 && ua.indexOf('mqqbrowser') === -1)) {
+    return 'QQ'
+  }
+  // 微博webview
+  if (ua.indexOf('weibo') > -1) {
+    return 'WB'
+  }
+  return 'BROWSER'
+}
+
+// 格式化时间
+export function getDateTimeFmt (date, fmt = 'yyyy-MM-dd') {
+  if (!date || date.getTime() === 0) {
     return ''
   }
   var type = ['object', 'string', 'number']
@@ -43,28 +108,8 @@ export const parseTime = (date, fmt = 'yyyy-MM-dd') => {
   return fmt
 }
 
-/**
- * 格式化ajax发送的参数
- * @param {object} obj 参数对象
- * @returns {object} 排除空字符串
- */
-export const formatParams = (obj) => {
-  if (Object.prototype.toString.call(obj) === '[Object Object]') {
-    let ret = {}
-    for (var key in obj) {
-      if (obj[key] !== '') {
-        ret[key] = obj[key]
-      }
-    }
-    return ret
-  }
-  return obj
-}
-
-/**
- * 深度拷贝
- */
-export const clone = (item) => {
+// 深度拷贝
+export function clone (item) {
   if (item === null || item === undefined) {
     return item
   }
@@ -103,31 +148,69 @@ export const clone = (item) => {
   return obj || item
 }
 
-export const getBrowerType = function () {
-  const ua = navigator.userAgent.toLowerCase()
-  // 微信
-  if (ua.indexOf('micromessenger') !== -1) {
-    return 'WX'
+/**
+ * 保留小数点，只舍不入
+ * @method
+ * @author ChenJing
+ * @param  {Number} value   需要保留小数点的数值
+ * @param  {Number} [decimal=2] 需要保留的小数点位数，默认2位
+ * @param  {String} [type=round] round: 四舍五入; floor: 向下取整; ceil: 向上取整
+ * @return {String}         返回小数点格式的字符串
+ */
+export function decimalPoint (value, decimal = 2, type = 'round') {
+  const pow = Math.pow(10, decimal)
+  value = type === 'round'
+    ? Math.round(parseFloat(value) * pow) / pow + ''
+    : type === 'floor'
+      ? Math.floor(parseFloat(value) * pow) / pow + ''
+      : Math.ceil(parseFloat(value) * pow) / pow + ''
+  // 小数点后需要补充0的个数
+  let cover = decimal - (value.split('.')[1] || '').length
+  if (cover === 0) {
+    return value
   }
-  // 安卓QQ
-  if (ua.indexOf('mobile mqqbrowser') !== -1) {
-    return 'QQ'
-  }
-  // iphone QQ
-  if ((ua.indexOf('iphone') > -1 || ua.indexOf('mac') > -1) &&
-      (ua.indexOf('qq') > -1 && ua.indexOf('mqqbrowser') === -1)) {
-    return 'QQ'
-  }
-  return 'BROWSER'
+  return value + (cover === decimal ? '.' : '') + String(Math.pow(10, cover)).substr(1)
 }
 
-// 解析URL参数
-export const getUrlParam = function (name, url = '') {
-  url = url || window.location.search || window.location.hash
-  const reg = new RegExp('(^|&)' + name + '=([^&]*)(&|$)')
-  const r = url.substr(url.indexOf('?') + 1).match(reg)
-  if (r != null) {
-    return unescape(r[2])
+/**
+ * 防抖函数
+ * @method debounce
+ * @author ChenJing
+ * @param  {Function}  func              目标执行函数
+ * @param  {Number}    [wait=200]        防抖间隔毫秒数
+ * @param  {Boolean}   [immediate=true]  是否立即执行
+ * @return {Function}
+ */
+export function debounce (func, wait = 200, immediate = true) {
+  let timeoutId = 0
+  return function (...args) {
+    clearTimeout(timeoutId)
+    if (!timeoutId && immediate) {
+      func.apply(this, args)
+    }
+    timeoutId = setTimeout(() => {
+      func.apply(this, args)
+      timeoutId = 0
+    }, wait)
   }
-  return null
+}
+
+/**
+ * 节流函数
+ * @method throttle
+ * @author ChenJing
+ * @param  {Function} func 目标执行函数
+ * @param  {Number} [wait=200] 间隔毫秒数
+ * @return {Function}
+ */
+export function throttle (func, wait = 200) {
+  let timeoutId = 0
+  return function (...args) {
+    if (!timeoutId) {
+      timeoutId = setTimeout(() => {
+        timeoutId = 0
+        func.apply(this, args)
+      }, wait)
+    }
+  }
 }
