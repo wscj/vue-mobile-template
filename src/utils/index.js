@@ -187,11 +187,15 @@ export function debounce (func, wait = 200, immediate = true) {
     clearTimeout(timeoutId)
     if (!timeoutId && immediate) {
       func.apply(this, args)
+      timeoutId = setTimeout(() => {
+        timeoutId = 0
+      }, wait)
+    } else {
+      timeoutId = setTimeout(() => {
+        func.apply(this, args)
+        timeoutId = 0
+      }, wait)
     }
-    timeoutId = setTimeout(() => {
-      func.apply(this, args)
-      timeoutId = 0
-    }, wait)
   }
 }
 

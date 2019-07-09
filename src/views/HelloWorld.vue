@@ -43,8 +43,8 @@ export default {
     }
     console.log(throttle)
     // const fn = throttle(handler)
-    const fn = debounce(handler, 250, false)
-    this.$el.addEventListener('mousemove', fn)
+    const fn = debounce(handler, 200, false)
+    this.$el.addEventListener('click', fn)
   }
 }
 </script>
